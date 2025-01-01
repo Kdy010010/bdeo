@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>동영상 목록</h2>
+<ul>
+    {% for video in videos %}
+    <li>
+        <a href="{{ url_for('watch_video', video_id=video[0]) }}">
+            {{ video[1] }}
+        </a>
+        <span class="like-count">좋아요 {{ video[2] }}개</span>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>동영상 업로드</h2>
+<form method="POST" enctype="multipart/form-data">
+    <label for="file">동영상 파일 선택:</label>
+    <input type="file" name="file" id="file" accept="video/*" required>
+    <br><br>
+    <input type="submit" value="업로드">
+</form>
+{% endblock %}

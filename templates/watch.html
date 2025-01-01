@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>동영상 시청</h2>
+
+<!-- video = (id, filename, likes) -->
+<video width="640" height="360" controls>
+    <source src="{{ url_for('uploaded_file', filename=video[1]) }}" type="video/mp4">
+    사용 중인 브라우저는 비디오 태그를 지원하지 않습니다.
+</video>
+
+<div class="video-info">
+    <p>파일명: {{ video[1] }}</p>
+    <p>좋아요: {{ video[2] }}</p>
+    <a class="like-button" href="{{ url_for('like_video', video_id=video[0]) }}">좋아요 누르기</a>
+</div>
+
+<hr>
+<h3>댓글</h3>
+<ul>
+    {% for c in comments %}
+    <li>
+        <strong>{{ c[0] }}</strong> ({{ c[2] }}): {{ c[1] }}
+    </li>
+    {% endfor %}
+</ul>
+
+<form method="POST" action="{{ url_for('comment_video', video_id=video[0]) }}">
+    <label for="username">이름:</label>
+    <input type="text" name="username" id="username" placeholder="익명" />
+    <br>
+    <label for="comment_text">댓글:</label>
+    <textarea name="comment_text" id="comment_text" rows="3" cols="50"></textarea>
+    <br>
+    <input type="submit" value="댓글 작성">
+</form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>검색 결과</h2>
+
+{% if query %}
+    <p>"<strong>{{ query }}</strong>"에 대한 검색 결과</p>
+{% else %}
+    <p>검색어가 입력되지 않았습니다.</p>
+{% endif %}
+
+<hr>
+
+{% if results %}
+    <ul>
+    {% for video in results %}
+        <li>
+            <a href="{{ url_for('watch_video', video_id=video[0]) }}">{{ video[1] }}</a>
+            <span class="like-count">좋아요 {{ video[2] }}개</span>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>일치하는 동영상이 없습니다.</p>
+{% endif %}
+{% endblock %}
